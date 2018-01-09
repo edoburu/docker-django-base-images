@@ -10,6 +10,7 @@ Features:
 * No separate Nginx container is needed thanks to `uwsgi --http-socket`.
 * [MozJPEG](https://github.com/mozilla/mozjpeg) installed.
 * Pillow generated JPEG images pass [Google PageSpeed](https://developers.google.com/speed/pagespeed/insights/).
+* Run `manage.py check --deploy` on startup.
 
 The default ports are 8080 (HTTP) and 1717 (uWSGI stats). These higher ports allow the container to run as unprivileged user.
 
