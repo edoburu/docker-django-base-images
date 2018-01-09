@@ -60,11 +60,16 @@ RUN manage.py compilemessages && \
     manage.py collectstatic --settings=$DJANGO_SETTINGS_MODULE --noinput && \
     gzip --keep --best --force --recursive /app/web/static/
 
+# Add extra uwsgi settings
+COPY deployment/docker/uwsgi-local.ini /usr/local/etc/uwsgi-local.ini
+
 # Reduce default permissions
 USER app
 ```
 
 The default healtcheck uses `localhost`, so adding `localhost` to `ALLOWED_HOSTS` is probably a good idea.
+
+You may add `SILENCED_SYSTEM_CHECKS = ['security.W001']` since the `SecurityMiddleware` headers are sent by uWSGI already.
 
 
 Base image usage
