@@ -13,8 +13,7 @@ CMD ["/usr/local/bin/uwsgi", "--ini", "/usr/local/etc/uwsgi.ini"]
 WORKDIR /app/src
 ONBUILD VOLUME /app/web/media
 
-RUN mkdir -p /app/src/requirements && \
-    mkdir -p /app/web/media /app/web/static/CACHE && \
+RUN mkdir -p /app/web/media /app/web/static/CACHE && \
     chown -R app:app /app/web/media/ /app/web/static/CACHE && \
     chmod -R go+rw /app/web/media/ /app/web/static/CACHE
 
