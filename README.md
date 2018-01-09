@@ -136,10 +136,36 @@ RUN echo $GIT_VERSION > .docker-git-version
 USER app
 ```
 
+A `.dockerignore` with at least the following exclusions is recommended:
+
+```
+*.pyc
+*.mo
+*.db
+*.css.map
+.cache
+.sass-cache
+.idea
+.vagrant
+.git
+.DS_Store
+__pycache__
+src/myproject/settings/local.py
+src/node_modules
+web/media
+web/static/CACHE
+```
+
 Overriding UWSGI config
 -----------------------
 
-The onbuild image contains a default [uwsgi.ini](https://github.com/edoburu/docker-django-base-images/blob/master/py36-stretch-runtime/onbuild/uwsgi.ini) that is fully functional, but is slightly opinionated about static file paths. It can be easily overwritten by adding a different version:
+The onbuild image contains a default [uwsgi.ini](https://github.com/edoburu/docker-django-base-images/blob/master/py36-stretch-runtime/onbuild/uwsgi.ini) that is fully functional, but is slightly opinionated about static file paths. It can be easily extended by adding a different version:
+
+```
+COPY uwsgi-local.ini /usr/local/etc/uwsgi-local.ini
+```
+
+Or overwritten all together:
 
 ```
 COPY uwsgi.ini /usr/local/etc/uwsgi.ini
