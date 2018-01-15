@@ -67,8 +67,6 @@ COPY deployment/docker/uwsgi-local.ini /usr/local/etc/uwsgi-local.ini
 USER app
 ```
 
-The default healtcheck uses `localhost`, so adding `localhost` to `ALLOWED_HOSTS` is probably a good idea.
-
 You may add `SILENCED_SYSTEM_CHECKS = ['security.W001']` since the `SecurityMiddleware` headers are sent by uWSGI already.
 
 
@@ -105,7 +103,6 @@ ENV UWSGI_PROCESSES=1 \
 
 # System config (done early, avoid running on every code change)
 EXPOSE 8080 1717
-HEALTHCHECK --interval=5m --timeout=3s CMD curl -f http://localhost:8080/api/healthcheck/ || exit 1
 CMD ["/usr/local/bin/uwsgi", "--ini", "/usr/local/etc/uwsgi.ini"]
 WORKDIR /app/src
 VOLUME /app/web/media
@@ -174,3 +171,22 @@ COPY uwsgi.ini /usr/local/etc/uwsgi.ini
 
 The default [uwsgi.ini](https://github.com/edoburu/docker-django-base-images/blob/master/py36-stretch-runtime/onbuild/uwsgi.ini) serves static files entirely from uWSGI, with HTTP cache headers set. [WhiteNoise](http://whitenoise.evans.io/) can still be used to generate cache-busing file names, but serving files performs better using `uwsgi --static-map` since it can cache ``stat()`` calls and use offload threads.
 
+
+Other recommendations
+---------------------
+
+Don't forget to include a `HEALTHCHECK` in your docker file:
+
+```dockerfile
+HEALTHCHECK --interval=5m --timeout=3s CMD curl -f http://localhost:8080/api/healthcheck/ || exit 1
+```
+
+Consider adding `localhost` to `ALLOWED_HOSTS`, to make healthhecks easy to implement.
+
+Consider including the latest git version:
+
+```dockerfile
+ARG GIT_VERSION
+LABEL git-version=$GIT_VERSION
+RUN echo $GIT_VERSION > .docker-git-version
+```

@@ -8,7 +8,6 @@ ENV UWSGI_PROCESSES=1 \
 
 # System config (done early, avoid running on every code change)
 EXPOSE 8080 1717
-HEALTHCHECK --interval=5m --timeout=3s CMD curl -f http://localhost:8080/api/healthcheck/ || exit 1
 CMD ["/usr/local/bin/uwsgi", "--ini", "/usr/local/etc/uwsgi.ini"]
 WORKDIR /app/src
 ONBUILD VOLUME /app/web/media
