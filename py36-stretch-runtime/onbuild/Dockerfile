@@ -37,8 +37,3 @@ ONBUILD COPY src /app/src
 ONBUILD RUN rm /app/src/*/settings/local.py* && \
     find . -name '*.pyc' -delete && \
     python -mcompileall -q */
-
-# Tag the docker image
-ONBUILD ARG GIT_VERSION
-ONBUILD LABEL git-version=$GIT_VERSION
-ONBUILD RUN echo $GIT_VERSION > .docker-git-version

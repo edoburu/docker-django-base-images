@@ -133,11 +133,6 @@ RUN rm /app/src/*/settings/local.py* && \
     chown -R app:app /app/web/media/ /app/web/static/CACHE && \
     chmod -R go+rw /app/web/media/ /app/web/static/CACHE
 
-# Tag the docker image
-ARG GIT_VERSION
-LABEL git-version=$GIT_VERSION
-RUN echo $GIT_VERSION > .docker-git-version
-
 # Reduce default permissions
 USER app
 ```
