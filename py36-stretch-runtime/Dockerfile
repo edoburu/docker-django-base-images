@@ -9,7 +9,7 @@ ENV PYTHONUNBUFFERED=1 \
 # - postgresql-client for `manage.py dbshell`
 # - mime-support for `uwsgi --http`
 # - libxml for lxml
-# - libpng and jpeg2000 support for Pillow
+# - libpng, freetype and jpeg2000 support for Pillow
 # - skipped libjpeg62-turbo, as mozjpeg is used instead.
 RUN apt-get update && \
     mkdir -p /usr/share/man/man1 /usr/share/man/man7 && \
@@ -17,6 +17,7 @@ RUN apt-get update && \
         libxml2 \
         libpng16-16 \
         libopenjp2-7 \
+        libfreetype6 \
         gettext \
         mime-support \
         postgresql-client && \
