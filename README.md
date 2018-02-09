@@ -96,7 +96,7 @@ RUN find /usr/local/lib/python3.6/site-packages/ -name '*.po' -delete && \
 FROM edoburu/django-base-images:py36-stretch-runtime
 ENV UWSGI_PROCESSES=1 \
     UWSGI_THREADS=20 \
-    UWSGI_OFFLOAD_THREADS=20 \
+    UWSGI_OFFLOAD_THREADS=%k \
     UWSGI_MODULE=mysite.wsgi.docker:application \
     DJANGO_SETTINGS_MODULE=mysite.settings.docker \
     DATABASE_URL=sqlite:////tmp/demo.db

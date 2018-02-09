@@ -3,7 +3,7 @@
 FROM edoburu/django-base-images:py36-stretch-runtime
 ENV UWSGI_PROCESSES=1 \
     UWSGI_THREADS=20 \
-    UWSGI_OFFLOAD_THREADS=20 \
+    UWSGI_OFFLOAD_THREADS=%k \
     DATABASE_URL=sqlite:////tmp/demo.db
 
 # System config (done early, avoid running on every code change)
