@@ -17,3 +17,13 @@ runtime:
 	## Building runtime container
 	docker build -t edoburu/django-base-images:py36-stretch-runtime ./py36-stretch-runtime/
 	docker build -t edoburu/django-base-images:py36-stretch-runtime-onbuild ./py36-stretch-runtime/onbuild/
+
+push:
+	docker push edoburu/django-base-images:py36-stretch-build
+	docker push edoburu/django-base-images:py36-stretch-build-onbuild
+	docker push edoburu/django-base-images:py36-stretch-runtime
+	docker push edoburu/django-base-images:py36-stretch-runtime-onbuild
+
+
+clean:
+	docker rmi edoburu/django-base-images:py36-stretch-build edoburu/django-base-images:py36-stretch-build-onbuild edoburu/django-base-images:py36-stretch-runtime edoburu/django-base-images:py36-stretch-runtime-onbuild
