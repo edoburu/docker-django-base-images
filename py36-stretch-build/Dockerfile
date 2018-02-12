@@ -24,4 +24,5 @@ ENV LIBDIR=/opt/mozjpeg/lib64 \
     LD_RUN_PATH=/opt/mozjpeg/lib64:/usr/lib/x86_64-linux-gnu
 
 # Add caching layer for latest pillow
-RUN pip install --no-binary=Pillow Pillow==5.0.0
+RUN pip install --no-binary=Pillow Pillow==5.0.0 && \
+    pip install uwsgi==2.0.16
