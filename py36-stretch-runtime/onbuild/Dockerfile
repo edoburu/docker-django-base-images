@@ -2,7 +2,7 @@
 # Default DATABASE_URL is useful for local testing, and avoids connect timeouts for `manage.py`.
 FROM edoburu/django-base-images:py36-stretch-runtime
 ENV UWSGI_PROCESSES=1 \
-    UWSGI_THREADS=20 \
+    UWSGI_THREADS=10 \
     UWSGI_OFFLOAD_THREADS=%k \
     DATABASE_URL=sqlite:////tmp/demo.db
 
