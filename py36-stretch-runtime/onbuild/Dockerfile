@@ -19,8 +19,8 @@ RUN mkdir -p /app/web/media /app/web/static/CACHE && \
 # Install dependencies
 COPY manage.py /usr/local/bin/
 COPY uwsgi.ini /usr/local/etc/uwsgi.ini
-COPY preflight-check /preflight-check
-ENTRYPOINT ["/preflight-check"]
+COPY django-init /django-init
+ENTRYPOINT ["/django-init"]
 ONBUILD COPY --from=build-image /usr/local/bin/ /usr/local/bin/
 ONBUILD COPY --from=build-image /usr/local/lib/python3.6/site-packages/ /usr/local/lib/python3.6/site-packages/
 
