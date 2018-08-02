@@ -55,4 +55,4 @@ clean36:
 	docker rmi edoburu/django-base-images:py36-stretch-build edoburu/django-base-images:py36-stretch-build-onbuild edoburu/django-base-images:py36-stretch-runtime edoburu/django-base-images:py36-stretch-runtime-onbuild
 
 clean37:
-	docker rmi edoburu/django-base-images:py37-stretch-build edoburu/django-base-images:py36-stretch-build-onbuild edoburu/django-base-images:py36-stretch-runtime edoburu/django-base-images:py36-stretch-runtime-onbuild
+	docker rmi edoburu/django-base-images:py37-stretch-build edoburu/django-base-images:py37-stretch-build-onbuild edoburu/django-base-images:py37-stretch-runtime edoburu/django-base-images:py37-stretch-runtime-onbuild
