@@ -5,6 +5,7 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=off
 
 # Install runtime dependencies.
+# - curl for healthchecks
 # - gettext for `manage.py compilemessages` (run here to avoid busting build-container cache layers)
 # - postgresql-client for `manage.py dbshell`
 # - mime-support for `uwsgi --http`
@@ -19,6 +20,7 @@ RUN apt-get update && \
         libopenjp2-7 \
         libfreetype6 \
         libtiff5 \
+        curl \
         gettext \
         mime-support \
         postgresql-client && \
