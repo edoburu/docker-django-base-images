@@ -14,7 +14,8 @@ ONBUILD VOLUME /app/web/media
 
 RUN mkdir -p /app/web/media /app/web/static/CACHE && \
     chown -R app:app /app/web/media/ /app/web/static/CACHE && \
-    chmod -R go+rw /app/web/media/ /app/web/static/CACHE
+    chmod -R go+rw /app/web/media/ /app/web/static/CACHE && \
+    echo -e "[uwsgi]\nfoo = 1" > /usr/local/etc/uwsgi-local.ini
 
 # Install dependencies
 COPY manage.py /usr/local/bin/
