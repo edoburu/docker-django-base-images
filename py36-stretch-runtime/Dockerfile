@@ -12,7 +12,9 @@ ENV PYTHONUNBUFFERED=1 \
 # - libxml for lxml
 # - libpng, freetype, libtiff and jpeg2000 support for Pillow
 # - skipped libjpeg62-turbo, as mozjpeg is used instead.
+# Performing dist-upgrade in case base image is outdated.
 RUN apt-get update && \
+    apt-get dist-upgrade -y && \
     mkdir -p /usr/share/man/man1 /usr/share/man/man7 && \
     apt-get install --no-install-recommends -y \
         libxml2 \
