@@ -32,6 +32,8 @@ Base images:
 - `py36-stretch-runtime` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py36-stretch-runtime/Dockerfile)) - Run-time container with [mozjpeg](https://github.com/mozilla/mozjpeg), and default run-time libraries.
 - `py37-stretch-build` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py37-stretch-build/Dockerfile)) - Build-time container with [mozjpeg](https://github.com/mozilla/mozjpeg), and [Pillow](https://python-pillow.org/) 5.0 linked to it.
 - `py37-stretch-runtime` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py37-stretch-runtime/Dockerfile)) - Run-time container with [mozjpeg](https://github.com/mozilla/mozjpeg), and default run-time libraries.
+- `py38-buster-build` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py38-buster-build/Dockerfile)) - Build-time container with [mozjpeg](https://github.com/mozilla/mozjpeg), and [Pillow](https://python-pillow.org/) 5.0 linked to it.
+- `py38-buster-runtime` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py38-buster-runtime/Dockerfile)) - Run-time container with [mozjpeg](https://github.com/mozilla/mozjpeg), and default run-time libraries.
 
 Onbuild images:
 
@@ -39,6 +41,8 @@ Onbuild images:
 - `py36-stretch-runtime-onbuild` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py36-stretch-runtime/onbuild/Dockerfile)) - Pre-scripted runtime container that assumes `src/`, `web/media` and `web/static` are available. Supports `GIT_VERSION` build arg.
 - `py37-stretch-build-onbuild` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py37-stretch-build/onbuild/Dockerfile)) - Pre-scripted build container that assumes `src/requirements/docker.txt` is available. Supports `PIP_REQUIREMENTS` build arg.
 - `py37-stretch-runtime-onbuild` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py37-stretch-runtime/onbuild/Dockerfile)) - Pre-scripted runtime container that assumes `src/`, `web/media` and `web/static` are available. Supports `GIT_VERSION` build arg.
+- `py38-buster-build-onbuild` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py38-buster-build/onbuild/Dockerfile)) - Pre-scripted build container that assumes `src/requirements/docker.txt` is available. Supports `PIP_REQUIREMENTS` build arg.
+- `py38-buster-runtime-onbuild` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py38-buster-runtime/onbuild/Dockerfile)) - Pre-scripted runtime container that assumes `src/`, `web/media` and `web/static` are available. Supports `GIT_VERSION` build arg.
 
 
 Onbuild Usage
@@ -48,14 +52,14 @@ The "onbuild" images contain pre-scripted and opinionated assumptions about the 
 Using these images result in a very small ``Dockerfile``:
 
 ```dockerfile
-FROM edoburu/django-base-images:py37-stretch-build-onbuild AS build-image
+FROM edoburu/django-base-images:py38-buster-build-onbuild AS build-image
 
 # Remove more unneeded locale files
-RUN find /usr/local/lib/python3.7/site-packages/babel/locale-data/ -not -name 'en*' -not -name 'nl*' -name '*.dat' -delete && \
-    find /usr/local/lib/python3.7/site-packages/tinymce/ -regextype posix-egrep -not -regex '.*/langs/(en|nl).*\.js' -wholename '*/langs/*.js' -delete
+RUN find /usr/local/lib/python3.8/site-packages/babel/locale-data/ -not -name 'en*' -not -name 'nl*' -name '*.dat' -delete && \
+    find /usr/local/lib/python3.8/site-packages/tinymce/ -regextype posix-egrep -not -regex '.*/langs/(en|nl).*\.js' -wholename '*/langs/*.js' -delete
 
 # Start runtime container
-FROM edoburu/django-base-images:py37-stretch-runtime-onbuild
+FROM edoburu/django-base-images:py38-buster-runtime-onbuild
 ENV DJANGO_SETTINGS_MODULE=mysite.settings.docker \
     UWSGI_MODULE=mysite.wsgi.docker:application
 
@@ -82,7 +86,7 @@ While the "onbuild" images are opinionated, the base images only contain what is
 ```dockerfile
 # Build environment has gcc and develop header files.
 # The installed files are copied to the smaller runtime container.
-FROM edoburu/django-base-images:py37-stretch-build AS build-image
+FROM edoburu/django-base-images:py38-buster-build AS build-image
 
 # Install (and compile) all dependencies
 RUN mkdir -p /app/src/requirements
@@ -91,13 +95,13 @@ ARG PIP_REQUIREMENTS=/app/src/requirements/docker.txt
 RUN pip install --no-binary=Pillow -r $PIP_REQUIREMENTS
 
 # Remove unneeded locale files
-RUN find /usr/local/lib/python3.7/site-packages/ -name '*.po' -delete && \
-    find /usr/local/lib/python3.7/site-packages/babel/locale-data/ -not -name 'en*' -not -name 'nl*' -name '*.dat' -delete && \
-    find /usr/local/lib/python3.7/site-packages/tinymce/ -regextype posix-egrep -not -regex '.*/langs/(en|nl).*\.js' -wholename '*/langs/*.js' -delete
+RUN find /usr/local/lib/python3.8/site-packages/ -name '*.po' -delete && \
+    find /usr/local/lib/python3.8/site-packages/babel/locale-data/ -not -name 'en*' -not -name 'nl*' -name '*.dat' -delete && \
+    find /usr/local/lib/python3.8/site-packages/tinymce/ -regextype posix-egrep -not -regex '.*/langs/(en|nl).*\.js' -wholename '*/langs/*.js' -delete
 
 # Start runtime container
 # Default DATABASE_URL is useful for local testing, and avoids connect timeouts for `manage.py`.
-FROM edoburu/django-base-images:py37-stretch-runtime
+FROM edoburu/django-base-images:py38-buster-runtime
 ENV UWSGI_PROCESSES=1 \
     UWSGI_THREADS=20 \
     UWSGI_OFFLOAD_THREADS=%k \
@@ -113,7 +117,7 @@ VOLUME /app/web/media
 
 # Install dependencies
 COPY --from=build-image /usr/local/bin/ /usr/local/bin/
-COPY --from=build-image /usr/local/lib/python3.7/site-packages/ /usr/local/lib/python3.7/site-packages/
+COPY --from=build-image /usr/local/lib/python3.8/site-packages/ /usr/local/lib/python3.8/site-packages/
 COPY deployment/docker/manage.py /usr/local/bin/
 COPY deployment/docker/uwsgi.ini /usr/local/etc/uwsgi.ini
 
