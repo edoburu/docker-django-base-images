@@ -6,7 +6,7 @@ ENV PYTHONUNBUFFERED=1 \
 # Based on https://engineeringblog.yelp.com/2017/06/making-photos-smaller.html
 ARG MOZJPEG_VERSION=3.2
 RUN apt-get update && \
-    apt-get install --yes nasm && \
+    apt-get install --yes nasm libwebp-dev && \
     rm /usr/lib/x86_64-linux-gnu/pkgconfig/libjpeg.pc \
        /usr/lib/x86_64-linux-gnu/libjpeg.* \
        /usr/include/jpegint.h && \

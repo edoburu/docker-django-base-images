@@ -22,6 +22,7 @@ RUN apt-get update && \
         libopenjp2-7 \
         libfreetype6 \
         libtiff5 \
+        libwebp6 \
         curl \
         gettext \
         mime-support \
