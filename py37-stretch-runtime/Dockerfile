@@ -24,6 +24,7 @@ RUN apt-get update && \
         libtiff5 \
         libwebp6 \
         libwebpmux2 \
+        libwebpdemux2 \
         curl \
         gettext \
         mime-support \
