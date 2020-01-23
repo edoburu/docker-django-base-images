@@ -23,6 +23,7 @@ RUN apt-get update && \
         libfreetype6 \
         libtiff5 \
         libwebp6 \
+        libwebpmux2 \
         curl \
         gettext \
         mime-support \
