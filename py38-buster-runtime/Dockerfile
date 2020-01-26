@@ -30,7 +30,8 @@ RUN apt-get update && \
         mime-support \
         postgresql-client && \
     rm -rf /var/lib/apt/lists/* /var/cache/debconf/*-old && \
-    echo "font/woff2  woff2" >> /etc/mime.types && \
+    echo "font/woff2    woff2" >> /etc/mime.types && \
+    echo "image/webp    webp"  >> /etc/mime.types && \
     useradd --system --user-group app
 
 COPY --from=build-image /opt/mozjpeg /opt/mozjpeg
