@@ -1,6 +1,6 @@
 # Start runtime container
 # Default DATABASE_URL is useful for local testing, and avoids connect timeouts for `manage.py`.
-FROM edoburu/django-base-images:py36-stretch-runtime
+FROM edoburu/django-base-images:py310-bullseye-runtime
 ENV UWSGI_PROCESSES=1 \
     UWSGI_THREADS=10 \
     UWSGI_OFFLOAD_THREADS=%k \
@@ -23,7 +23,7 @@ COPY uwsgi.ini /usr/local/etc/uwsgi.ini
 COPY django-init /django-init
 ENTRYPOINT ["/django-init"]
 ONBUILD COPY --from=build-image /usr/local/bin/ /usr/local/bin/
-ONBUILD COPY --from=build-image /usr/local/lib/python3.6/site-packages/ /usr/local/lib/python3.6/site-packages/
+ONBUILD COPY --from=build-image /usr/local/lib/python3.10/site-packages/ /usr/local/lib/python3.10/site-packages/
 
 # Insert application code.
 # - Set a default database URL for accidental DB requests

@@ -1,6 +1,6 @@
-FROM edoburu/django-base-images:py37-stretch-build AS build-image
+FROM edoburu/django-base-images:py310-bullseye-build AS build-image
 
-FROM python:3.7-slim-stretch
+FROM python:3.10-slim-bullseye
 ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=off
 
@@ -23,7 +23,7 @@ RUN apt-get update && \
         libfreetype6 \
         libtiff5 \
         libwebp6 \
-        libwebpmux2 \
+        libwebpmux3 \
         libwebpdemux2 \
         curl \
         gettext \

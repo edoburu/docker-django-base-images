@@ -28,21 +28,17 @@ Available tags
 
 Base images:
 
-- `py36-stretch-build` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py36-stretch-build/Dockerfile)) - Build-time container with [mozjpeg](https://github.com/mozilla/mozjpeg), and [Pillow](https://python-pillow.org/) 5.0 linked to it.
-- `py36-stretch-runtime` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py36-stretch-runtime/Dockerfile)) - Run-time container with [mozjpeg](https://github.com/mozilla/mozjpeg), and default run-time libraries.
-- `py37-stretch-build` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py37-stretch-build/Dockerfile)) - Build-time container with [mozjpeg](https://github.com/mozilla/mozjpeg), and [Pillow](https://python-pillow.org/) 5.0 linked to it.
-- `py37-stretch-runtime` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py37-stretch-runtime/Dockerfile)) - Run-time container with [mozjpeg](https://github.com/mozilla/mozjpeg), and default run-time libraries.
-- `py38-buster-build` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py38-buster-build/Dockerfile)) - Build-time container with [mozjpeg](https://github.com/mozilla/mozjpeg), and [Pillow](https://python-pillow.org/) 5.0 linked to it.
+- `py38-buster-build` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py38-buster-build/Dockerfile)) - Build-time container with [mozjpeg](https://github.com/mozilla/mozjpeg), and [Pillow](https://python-pillow.org/) 9.2.0 linked to it.
 - `py38-buster-runtime` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py38-buster-runtime/Dockerfile)) - Run-time container with [mozjpeg](https://github.com/mozilla/mozjpeg), and default run-time libraries.
+- `py310-bullseye-build` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py310-bullseye-build/Dockerfile)) - Build-time container with [mozjpeg](https://github.com/mozilla/mozjpeg), and [Pillow](https://python-pillow.org/) 9.2.0 linked to it.
+- `py310-bullseye-runtime` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py310-bullseye-runtime/Dockerfile)) - Run-time container with [mozjpeg](https://github.com/mozilla/mozjpeg), and default run-time libraries.
 
 Onbuild images:
 
-- `py36-stretch-build-onbuild` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py36-stretch-build/onbuild/Dockerfile)) - Pre-scripted build container that assumes `src/requirements/docker.txt` is available. Supports `PIP_REQUIREMENTS` build arg.
-- `py36-stretch-runtime-onbuild` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py36-stretch-runtime/onbuild/Dockerfile)) - Pre-scripted runtime container that assumes `src/`, `web/media` and `web/static` are available. Supports `GIT_VERSION` build arg.
-- `py37-stretch-build-onbuild` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py37-stretch-build/onbuild/Dockerfile)) - Pre-scripted build container that assumes `src/requirements/docker.txt` is available. Supports `PIP_REQUIREMENTS` build arg.
-- `py37-stretch-runtime-onbuild` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py37-stretch-runtime/onbuild/Dockerfile)) - Pre-scripted runtime container that assumes `src/`, `web/media` and `web/static` are available. Supports `GIT_VERSION` build arg.
 - `py38-buster-build-onbuild` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py38-buster-build/onbuild/Dockerfile)) - Pre-scripted build container that assumes `src/requirements/docker.txt` is available. Supports `PIP_REQUIREMENTS` build arg.
 - `py38-buster-runtime-onbuild` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py38-buster-runtime/onbuild/Dockerfile)) - Pre-scripted runtime container that assumes `src/`, `web/media` and `web/static` are available. Supports `GIT_VERSION` build arg.
+- `py310-bullseye-build-onbuild` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py310-bullseye-build/onbuild/Dockerfile)) - Pre-scripted build container that assumes `src/requirements/docker.txt` is available. Supports `PIP_REQUIREMENTS` build arg.
+- `py310-bullseye-runtime-onbuild` ([Dockerfile](https://github.com/edoburu/docker-django-base-image/blob/master/py310-bullseye-runtime/onbuild/Dockerfile)) - Pre-scripted runtime container that assumes `src/`, `web/media` and `web/static` are available. Supports `GIT_VERSION` build arg.
 
 
 Onbuild Usage
