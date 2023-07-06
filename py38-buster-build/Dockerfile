@@ -7,8 +7,11 @@ ENV PYTHONUNBUFFERED=1 \
 ARG MOZJPEG_VERSION=3.2
 RUN apt-get update && \
     apt-get install --yes nasm libwebp-dev && \
-    rm /usr/lib/x86_64-linux-gnu/pkgconfig/libjpeg.pc \
+    rm /usr/lib/x86_64-linux-gnu/pkgconfig/xcb.pc \
+       /usr/lib/x86_64-linux-gnu/libxcb.* \
+       /usr/lib/x86_64-linux-gnu/pkgconfig/libjpeg.pc \
        /usr/lib/x86_64-linux-gnu/libjpeg.* \
+       /usr/include/xcb/*.h \
        /usr/include/jpegint.h && \
     mkdir /root/build && \
     curl -L -s https://github.com/mozilla/mozjpeg/archive/v$MOZJPEG_VERSION.tar.gz \
@@ -24,5 +27,6 @@ ENV LIBDIR=/opt/mozjpeg/lib64 \
     LD_RUN_PATH=/opt/mozjpeg/lib64:/usr/lib/x86_64-linux-gnu
 
 # Add caching layer for latest pillow
-RUN pip install --no-binary=Pillow Pillow --global-option="build_ext" --global-option="--disable-xcb" && \
+RUN pip install -U pip && \
+    pip install --no-binary=Pillow -C xcb=disable Pillow && \
     pip install uwsgi
