@@ -12,10 +12,10 @@ CMD ["/usr/local/bin/uwsgi", "--ini", "/usr/local/etc/uwsgi.ini"]
 WORKDIR /app/src
 ONBUILD VOLUME /app/web/media
 
-RUN mkdir -p /app/web/media /app/web/static/CACHE && \
-    chown -R app:app /app/web/media/ /app/web/static/CACHE && \
-    chmod -R go+rw /app/web/media/ /app/web/static/CACHE && \
-    echo -e "[uwsgi]\nfoo = 1" > /usr/local/etc/uwsgi-local.ini
+RUN mkdir -p /app/web/media /app/web/static/CACHE \
+ && chown -R app:app /app/web/media/ /app/web/static/CACHE \
+ && chmod -R go+rw /app/web/media/ /app/web/static/CACHE \
+ && echo -e "[uwsgi]\nfoo = 1" > /usr/local/etc/uwsgi-local.ini
 
 # Install dependencies
 COPY manage.py /usr/local/bin/
@@ -34,6 +34,6 @@ ONBUILD COPY --from=build-image /usr/local/lib/python3.10/site-packages/ /usr/lo
 ONBUILD COPY web /app/web
 ONBUILD COPY src /app/src
 
-ONBUILD RUN rm /app/src/*/settings/local.py* && \
-    find . -name '*.pyc' -delete && \
-    python -mcompileall -q */
+ONBUILD RUN rm /app/src/*/settings/local.py* \
+ && find . -name '*.pyc' -delete \
+ && python -mcompileall -q */

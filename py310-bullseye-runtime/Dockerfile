@@ -13,10 +13,10 @@ ENV PYTHONUNBUFFERED=1 \
 # - libpng, freetype, libtiff and jpeg2000 support for Pillow
 # - skipped libjpeg62-turbo, as mozjpeg is used instead.
 # Performing dist-upgrade in case base image is outdated.
-RUN apt-get update && \
-    apt-get dist-upgrade -y && \
-    mkdir -p /usr/share/man/man1 /usr/share/man/man7 && \
-    apt-get install --no-install-recommends -y \
+RUN apt-get update \
+ && apt-get dist-upgrade -y \
+ && mkdir -p /usr/share/man/man1 /usr/share/man/man7 \
+ && apt-get install --no-install-recommends -y \
         libxml2 \
         libpng16-16 \
         libopenjp2-7 \
@@ -28,10 +28,10 @@ RUN apt-get update && \
         curl \
         gettext \
         mime-support \
-        postgresql-client && \
-    rm -rf /var/lib/apt/lists/* /var/cache/debconf/*-old && \
-    echo "font/woff2    woff2" >> /etc/mime.types && \
-    echo "image/webp    webp"  >> /etc/mime.types && \
-    useradd --system --user-group app
+        postgresql-client \
+ && rm -rf /var/lib/apt/lists/* /var/cache/debconf/*-old \
+ && echo "font/woff2    woff2" >> /etc/mime.types \
+ && echo "image/webp    webp"  >> /etc/mime.types \
+ && useradd --system --user-group app
 
 COPY --from=build-image /opt/mozjpeg /opt/mozjpeg
