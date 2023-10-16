@@ -5,7 +5,7 @@ ENV PYTHONUNBUFFERED=1 \
 # Make sure optimized libjpeg is used for smaller thumbnail images
 # Based on https://engineeringblog.yelp.com/2017/06/making-photos-smaller.html
 # and https://github.com/danbooru/danbooru/blob/master/Dockerfile
-ARG MOZJPEG_VERSION=4.1.1
+ARG MOZJPEG_VERSION=4.1.5
 RUN apt-get update \
  && apt-get install --yes cmake nasm libpng-dev zlib1g-dev libwebp-dev \
  && rm /usr/lib/x86_64-linux-gnu/pkgconfig/xcb.pc \
@@ -27,6 +27,6 @@ ENV LIBDIR=/opt/mozjpeg/lib64 \
     LD_RUN_PATH=/opt/mozjpeg/lib64:/usr/lib/x86_64-linux-gnu
 
 # Add caching layer for latest pillow
-RUN pip install -U pip \
+RUN pip install -U pip wheel \
  && pip install --no-binary=Pillow -C xcb=disable Pillow \
  && pip install uwsgi
