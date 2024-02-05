@@ -28,6 +28,5 @@ ENV LIBDIR=/opt/mozjpeg/lib64 \
 
 # Add caching layer for latest pillow
 RUN pip install -U pip wheel \
- && pip install --no-binary=Pillow -C xcb=disable Pillow #\
-# UWSGI still fails to build on Python 3.12:
- #&& pip install uwsgi
+ && pip install --no-binary=Pillow -C xcb=disable Pillow \
+ && pip install uwsgi
