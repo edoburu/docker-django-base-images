@@ -7,7 +7,7 @@ ENV PYTHONUNBUFFERED=1 \
 # and https://github.com/danbooru/danbooru/blob/master/Dockerfile
 ARG MOZJPEG_VERSION=4.1.5
 RUN apt-get update \
- && apt-get install --yes cmake nasm libpng-dev zlib1g-dev libwebp-dev \
+ && apt-get install --yes cmake nasm libpng-dev zlib1g-dev libwebp-dev cmake nasm \
  && rm /usr/lib/x86_64-linux-gnu/pkgconfig/xcb.pc \
        /usr/lib/x86_64-linux-gnu/libxcb.* \
        /usr/lib/x86_64-linux-gnu/pkgconfig/libjpeg.pc \
@@ -27,6 +27,6 @@ ENV LIBDIR=/opt/mozjpeg/lib64 \
     LD_RUN_PATH=/opt/mozjpeg/lib64:/usr/lib/x86_64-linux-gnu
 
 # Add caching layer for latest pillow
-RUN pip install -U pip wheel \
+RUN pip install -U pip wheel uv \
  && pip install --no-binary=Pillow -C xcb=disable Pillow \
  && pip install uwsgi
