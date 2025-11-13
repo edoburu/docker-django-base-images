@@ -5,12 +5,13 @@ ENV PYTHONUNBUFFERED=1 \
     UV_PYTHON_DOWNLOADS=never \
     UV_PYTHON=python3.12 \
     UV_PROJECT_ENVIRONMENT=/usr/local/ \
-    UV_NO_CACHE=true \
-    UV_NO_DEV=true \
     UV_NO_BINARY_PACKAGE=Pillow \
-    UV_NO_MANAGED_PYTHON=true \
-    UV_COMPILE_BYTECODE=true \
-    UV_FROZEN=true
+    UV_NO_CACHE=1 \
+    UV_NO_DEV=1 \
+    UV_NO_EDITABLE=1 \
+    UV_NO_MANAGED_PYTHON=1 \
+    UV_COMPILE_BYTECODE=1 \
+    UV_FROZEN=1
 
 # Make sure optimized libjpeg is used for smaller thumbnail images
 # Based on https://engineeringblog.yelp.com/2017/06/making-photos-smaller.html
