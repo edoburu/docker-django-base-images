@@ -1,6 +1,16 @@
 FROM python:3.10-bullseye
+# Make sure `pip` doesn't cache, and `uv` installs into the system dir
 ENV PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=off
+    PIP_NO_CACHE_DIR=off \
+    UV_PYTHON_DOWNLOADS=never \
+    UV_PYTHON=python3.12 \
+    UV_PROJECT_ENVIRONMENT=/usr/local/ \
+    UV_NO_CACHE=true \
+    UV_NO_DEV=true \
+    UV_NO_BINARY_PACKAGE=Pillow \
+    UV_NO_MANAGED_PYTHON=true \
+    UV_COMPILE_BYTECODE=true \
+    UV_FROZEN=true
 
 # Make sure optimized libjpeg is used for smaller thumbnail images
 # Based on https://engineeringblog.yelp.com/2017/06/making-photos-smaller.html

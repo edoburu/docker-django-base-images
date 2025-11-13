@@ -1,8 +1,18 @@
 FROM edoburu/django-base-images:py312-bookworm-build AS build-image
 
 FROM python:3.12-slim-bookworm
+# Make sure `pip` doesn't cache, and `uv` installs into the system dir
 ENV PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=off
+    PIP_NO_CACHE_DIR=off \
+    UV_PYTHON_DOWNLOADS=never \
+    UV_PYTHON=python3.12 \
+    UV_PROJECT_ENVIRONMENT=/usr/local/ \
+    UV_NO_CACHE=true \
+    UV_NO_DEV=true \
+    UV_NO_BINARY_PACKAGE=Pillow \
+    UV_NO_MANAGED_PYTHON=true \
+    UV_COMPILE_BYTECODE=true \
+    UV_FROZEN=true
 
 # Install runtime dependencies.
 # - curl for healthchecks
