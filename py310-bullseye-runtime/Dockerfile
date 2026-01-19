@@ -4,16 +4,16 @@ FROM python:3.10-slim-bullseye
 # Make sure `pip` doesn't cache, and `uv` installs into the system dir
 ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=off \
-    UV_PYTHON_DOWNLOADS=never \
     UV_PYTHON=python3.12 \
+    UV_PYTHON_DOWNLOADS=never \
     UV_PROJECT_ENVIRONMENT=/usr/local/ \
+    UV_COMPILE_BYTECODE=1 \
+    UV_LOCKED=1 \
     UV_NO_BINARY_PACKAGE=Pillow \
     UV_NO_CACHE=1 \
     UV_NO_DEV=1 \
     UV_NO_EDITABLE=1 \
-    UV_NO_MANAGED_PYTHON=1 \
-    UV_COMPILE_BYTECODE=1 \
-    UV_FROZEN=1
+    UV_NO_MANAGED_PYTHON=1
 
 # Install runtime dependencies.
 # - curl for healthchecks

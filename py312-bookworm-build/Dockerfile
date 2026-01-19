@@ -2,16 +2,16 @@ FROM python:3.12-bookworm
 # Make sure `pip` doesn't cache, and `uv` installs into the system dir
 ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=off \
-    UV_PYTHON_DOWNLOADS=never \
     UV_PYTHON=python3.12 \
+    UV_PYTHON_DOWNLOADS=never \
     UV_PROJECT_ENVIRONMENT=/usr/local/ \
+    UV_COMPILE_BYTECODE=1 \
+    UV_LOCKED=1 \
     UV_NO_BINARY_PACKAGE=Pillow \
     UV_NO_CACHE=1 \
     UV_NO_DEV=1 \
     UV_NO_EDITABLE=1 \
-    UV_NO_MANAGED_PYTHON=1 \
-    UV_COMPILE_BYTECODE=1 \
-    UV_FROZEN=1
+    UV_NO_MANAGED_PYTHON=1
 
 # Make sure optimized libjpeg is used for smaller thumbnail images
 # Based on https://engineeringblog.yelp.com/2017/06/making-photos-smaller.html
@@ -37,7 +37,9 @@ RUN apt-get update \
 ENV LIBDIR=/opt/mozjpeg/lib64 \
     LD_RUN_PATH=/opt/mozjpeg/lib64:/usr/lib/x86_64-linux-gnu
 
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
 # Add caching layer for latest pillow
-RUN pip install -U pip wheel uv \
+RUN pip install -U pip wheel \
  && pip install --no-binary=Pillow -C xcb=disable Pillow \
  && pip install uwsgi
