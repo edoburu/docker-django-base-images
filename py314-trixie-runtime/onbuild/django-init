@@ -1,0 +1,17 @@
+#!/bin/sh
+
+case "$1" in
+  *uwsgi|*granian|*gunicorn|*uvicorn|*hypercorn|*daphne)
+    # For local development, avoid having to exec into the container for a test db.
+    # For production, migrate the database using an AWS single task definition or Kubernetes initContainer.
+    if [ "$DATABASE_URL" = "sqlite:////tmp/demo.db" ]; then
+      echo '** No $DATABASE_URL is configured, generating example data for local development' >&2
+      manage.py migrate
+    fi
+
+    # Only check when the container is started with the default CMD.
+    manage.py check --deploy
+    ;;
+esac
+
+exec "$@"
