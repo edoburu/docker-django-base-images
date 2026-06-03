@@ -19,7 +19,7 @@ COPY manage.py /usr/local/bin/
 COPY django-init /django-init
 ENTRYPOINT ["/django-init"]
 ONBUILD COPY --from=build-image /usr/local/bin/ /usr/local/bin/
-ONBUILD COPY --from=build-image /usr/local/lib/python3.14/site-packages/ /usr/local/lib/python3.12/site-packages/
+ONBUILD COPY --from=build-image /usr/local/lib/python3.14/site-packages/ /usr/local/lib/python3.14/site-packages/
 
 ONBUILD COPY web /app/web
 ONBUILD COPY src /app/src
